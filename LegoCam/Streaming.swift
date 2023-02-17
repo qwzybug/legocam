@@ -8,7 +8,7 @@
 import CoreGraphics
 import Foundation
 
-class MJPEGStreamer: NSObject, ObservableObject, URLSessionDelegate, URLSessionDataDelegate {
+class MJPEGStreamer: NSObject, ObservableObject, URLSessionDataDelegate {
     enum StreamError: LocalizedError, Equatable {
         case invalidResponse
         case invalidData
@@ -25,6 +25,7 @@ class MJPEGStreamer: NSObject, ObservableObject, URLSessionDelegate, URLSessionD
         }
     }
 
+    @MainActor
     enum State: Equatable {
         case idle
         case connecting(URLSessionDataTask)
@@ -33,7 +34,7 @@ class MJPEGStreamer: NSObject, ObservableObject, URLSessionDelegate, URLSessionD
     }
 
     @Published var state = State.idle
-    @Published var image: CGImage? = nil
+    @Published var image: CGImage?
 
     var error: StreamError? {
         if case let .error(error) = state {
@@ -51,8 +52,9 @@ class MJPEGStreamer: NSObject, ObservableObject, URLSessionDelegate, URLSessionD
             task.cancel()
         }
 
-        image = nil
         state = .idle
+        image = nil
+        munger = nil
     }
 
     func start(address: String) {
@@ -81,13 +83,15 @@ class MJPEGStreamer: NSObject, ObservableObject, URLSessionDelegate, URLSessionD
             return .cancel
         }
 
-        switch (state, response.statusCode) {
+        let currentState = await MainActor.run(resultType: State.self, body: { state })
+
+        switch (currentState, response.statusCode) {
         case (.connecting, 200 ..< 299):
-            state = .streaming(dataTask)
+            await MainActor.run { state = .streaming(dataTask) }
 
         case (_, 400 ..< 599):
             NSLog("Error receiving stream: \(response.statusCode)")
-            state = .error(.streamError(response.statusCode))
+            await MainActor.run { state = .error(.streamError(response.statusCode)) }
             return .cancel
 
         default: break
@@ -105,6 +109,7 @@ class MJPEGStreamer: NSObject, ObservableObject, URLSessionDelegate, URLSessionD
         do {
             if let newImage = try munger?.munge(data: data) {
                 DispatchQueue.main.async {
+                    guard case .streaming = self.state else { return }
                     self.image = newImage
                 }
             }
@@ -116,6 +121,8 @@ class MJPEGStreamer: NSObject, ObservableObject, URLSessionDelegate, URLSessionD
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         DispatchQueue.main.async {
+            if case .idle = self.state { return }
+
             if let error = error {
                 NSLog("ERROR: \(error.localizedDescription)")
                 self.state = .error(error as? StreamError ?? .other(error.localizedDescription))
@@ -132,7 +139,7 @@ private struct JPEGMunger {
     var data = Data()
 
     mutating func munge(data newData: Data) throws -> CGImage? {
-        guard newData.count + data.count > bytes else {
+        guard newData.count + data.count <= bytes else {
             throw MJPEGStreamer.StreamError.invalidData
         }
 
