@@ -69,7 +69,7 @@ struct ContentView: View {
                 } else {
                     RoundedRectangle(cornerRadius: 2, style: .continuous)
                         .foregroundColor(.secondary)
-                        .aspectRatio(1.5, contentMode: .fit)
+                        .aspectRatio(4 / 3, contentMode: .fit)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
