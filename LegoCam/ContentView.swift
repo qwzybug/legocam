@@ -78,7 +78,9 @@ struct ContentView: View {
                 if selectedFrameIndex != nil {
                     selectedFrameIndex = nil
                 } else if let image = streamer.image {
-                    frames.append(Frame(image: image))
+                    withAnimation {
+                        frames.append(Frame(image: image))
+                    }
                 }
             } label: {
                 Image(systemName: "camera")
