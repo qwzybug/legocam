@@ -34,14 +34,19 @@ struct ContentView: View {
             HStack {
                 TextField("URL", text: $address)
                     .disabled(streamer.state != .idle)
-                    .textInputAutocapitalization(.never)
                     .disableAutocorrection(true)
+                #if os(iOS)
+                    .textInputAutocapitalization(.never)
+                #endif
 
                 switch streamer.state {
-                case .idle:
-                    Button("Stream") {
+                case .idle, .error:
+                    Button("Connect") {
                         streamer.start(address: address)
                     }
+
+                case .connecting:
+                    Button("Connecting...", action: {}).disabled(true)
 
                 case .streaming:
                     Button("Stop") {
@@ -83,8 +88,8 @@ struct ContentView: View {
             .background(.red)
             .foregroundColor(.primary)
             .clipShape(Circle())
-            .opacity(streamer.state == .idle ? 0.5 : 1.0)
-            .disabled(streamer.state == .idle)
+            .opacity(streamer.image != nil ? 1.0 : 0.5)
+            .disabled(streamer.image == nil)
 
             HStack(spacing: 0) {
                 ScrollView([.horizontal]) {
@@ -125,6 +130,11 @@ struct ContentView: View {
             }
         }
         .padding()
+        .alert(isPresented: .constant(streamer.error != nil), error: streamer.error, actions: {
+            Button("OK") {
+                streamer.stop()
+            }
+        })
     }
 
     func togglePlayback() {
