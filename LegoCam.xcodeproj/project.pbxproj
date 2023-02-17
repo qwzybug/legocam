@@ -1,0 +1,625 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03465F90299DE9DD00AF41B2 /* LegoCamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03465F8F299DE9DD00AF41B2 /* LegoCamApp.swift */; };
+		03465F92299DE9DD00AF41B2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03465F91299DE9DD00AF41B2 /* ContentView.swift */; };
+		03465F94299DE9DE00AF41B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03465F93299DE9DE00AF41B2 /* Assets.xcassets */; };
+		03465F98299DE9DE00AF41B2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03465F97299DE9DE00AF41B2 /* Preview Assets.xcassets */; };
+		03465FA2299DE9DE00AF41B2 /* LegoCamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03465FA1299DE9DE00AF41B2 /* LegoCamTests.swift */; };
+		03465FAC299DE9DE00AF41B2 /* LegoCamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03465FAB299DE9DE00AF41B2 /* LegoCamUITests.swift */; };
+		03465FAE299DE9DE00AF41B2 /* LegoCamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03465FAD299DE9DE00AF41B2 /* LegoCamUITestsLaunchTests.swift */; };
+		03465FBB299E0B7F00AF41B2 /* Streaming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03465FBA299E0B7F00AF41B2 /* Streaming.swift */; };
+		03465FBD299E0C5E00AF41B2 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03465FBC299E0C5E00AF41B2 /* Player.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		03465F9E299DE9DE00AF41B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03465F84299DE9DD00AF41B2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03465F8B299DE9DD00AF41B2;
+			remoteInfo = LegoCam;
+		};
+		03465FA8299DE9DE00AF41B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03465F84299DE9DD00AF41B2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03465F8B299DE9DD00AF41B2;
+			remoteInfo = LegoCam;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		03465F8C299DE9DD00AF41B2 /* LegoCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LegoCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03465F8F299DE9DD00AF41B2 /* LegoCamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegoCamApp.swift; sourceTree = "<group>"; };
+		03465F91299DE9DD00AF41B2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		03465F93299DE9DE00AF41B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		03465F95299DE9DE00AF41B2 /* LegoCam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LegoCam.entitlements; sourceTree = "<group>"; };
+		03465F97299DE9DE00AF41B2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		03465F9D299DE9DE00AF41B2 /* LegoCamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LegoCamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		03465FA1299DE9DE00AF41B2 /* LegoCamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegoCamTests.swift; sourceTree = "<group>"; };
+		03465FA7299DE9DE00AF41B2 /* LegoCamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LegoCamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		03465FAB299DE9DE00AF41B2 /* LegoCamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegoCamUITests.swift; sourceTree = "<group>"; };
+		03465FAD299DE9DE00AF41B2 /* LegoCamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegoCamUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		03465FBA299E0B7F00AF41B2 /* Streaming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Streaming.swift; sourceTree = "<group>"; };
+		03465FBC299E0C5E00AF41B2 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		03465F89299DE9DD00AF41B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03465F9A299DE9DE00AF41B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03465FA4299DE9DE00AF41B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03465F83299DE9DD00AF41B2 = {
+			isa = PBXGroup;
+			children = (
+				03465F8E299DE9DD00AF41B2 /* LegoCam */,
+				03465FA0299DE9DE00AF41B2 /* LegoCamTests */,
+				03465FAA299DE9DE00AF41B2 /* LegoCamUITests */,
+				03465F8D299DE9DD00AF41B2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		03465F8D299DE9DD00AF41B2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				03465F8C299DE9DD00AF41B2 /* LegoCam.app */,
+				03465F9D299DE9DE00AF41B2 /* LegoCamTests.xctest */,
+				03465FA7299DE9DE00AF41B2 /* LegoCamUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		03465F8E299DE9DD00AF41B2 /* LegoCam */ = {
+			isa = PBXGroup;
+			children = (
+				03465F8F299DE9DD00AF41B2 /* LegoCamApp.swift */,
+				03465F91299DE9DD00AF41B2 /* ContentView.swift */,
+				03465FBA299E0B7F00AF41B2 /* Streaming.swift */,
+				03465FBC299E0C5E00AF41B2 /* Player.swift */,
+				03465F93299DE9DE00AF41B2 /* Assets.xcassets */,
+				03465F95299DE9DE00AF41B2 /* LegoCam.entitlements */,
+				03465F96299DE9DE00AF41B2 /* Preview Content */,
+			);
+			path = LegoCam;
+			sourceTree = "<group>";
+		};
+		03465F96299DE9DE00AF41B2 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				03465F97299DE9DE00AF41B2 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		03465FA0299DE9DE00AF41B2 /* LegoCamTests */ = {
+			isa = PBXGroup;
+			children = (
+				03465FA1299DE9DE00AF41B2 /* LegoCamTests.swift */,
+			);
+			path = LegoCamTests;
+			sourceTree = "<group>";
+		};
+		03465FAA299DE9DE00AF41B2 /* LegoCamUITests */ = {
+			isa = PBXGroup;
+			children = (
+				03465FAB299DE9DE00AF41B2 /* LegoCamUITests.swift */,
+				03465FAD299DE9DE00AF41B2 /* LegoCamUITestsLaunchTests.swift */,
+			);
+			path = LegoCamUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		03465F8B299DE9DD00AF41B2 /* LegoCam */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03465FB1299DE9DE00AF41B2 /* Build configuration list for PBXNativeTarget "LegoCam" */;
+			buildPhases = (
+				03465F88299DE9DD00AF41B2 /* Sources */,
+				03465F89299DE9DD00AF41B2 /* Frameworks */,
+				03465F8A299DE9DD00AF41B2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LegoCam;
+			productName = LegoCam;
+			productReference = 03465F8C299DE9DD00AF41B2 /* LegoCam.app */;
+			productType = "com.apple.product-type.application";
+		};
+		03465F9C299DE9DE00AF41B2 /* LegoCamTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03465FB4299DE9DE00AF41B2 /* Build configuration list for PBXNativeTarget "LegoCamTests" */;
+			buildPhases = (
+				03465F99299DE9DE00AF41B2 /* Sources */,
+				03465F9A299DE9DE00AF41B2 /* Frameworks */,
+				03465F9B299DE9DE00AF41B2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03465F9F299DE9DE00AF41B2 /* PBXTargetDependency */,
+			);
+			name = LegoCamTests;
+			productName = LegoCamTests;
+			productReference = 03465F9D299DE9DE00AF41B2 /* LegoCamTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		03465FA6299DE9DE00AF41B2 /* LegoCamUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03465FB7299DE9DE00AF41B2 /* Build configuration list for PBXNativeTarget "LegoCamUITests" */;
+			buildPhases = (
+				03465FA3299DE9DE00AF41B2 /* Sources */,
+				03465FA4299DE9DE00AF41B2 /* Frameworks */,
+				03465FA5299DE9DE00AF41B2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03465FA9299DE9DE00AF41B2 /* PBXTargetDependency */,
+			);
+			name = LegoCamUITests;
+			productName = LegoCamUITests;
+			productReference = 03465FA7299DE9DE00AF41B2 /* LegoCamUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		03465F84299DE9DD00AF41B2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					03465F8B299DE9DD00AF41B2 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					03465F9C299DE9DE00AF41B2 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 03465F8B299DE9DD00AF41B2;
+					};
+					03465FA6299DE9DE00AF41B2 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = 03465F8B299DE9DD00AF41B2;
+					};
+				};
+			};
+			buildConfigurationList = 03465F87299DE9DD00AF41B2 /* Build configuration list for PBXProject "LegoCam" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 03465F83299DE9DD00AF41B2;
+			productRefGroup = 03465F8D299DE9DD00AF41B2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				03465F8B299DE9DD00AF41B2 /* LegoCam */,
+				03465F9C299DE9DE00AF41B2 /* LegoCamTests */,
+				03465FA6299DE9DE00AF41B2 /* LegoCamUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		03465F8A299DE9DD00AF41B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03465F98299DE9DE00AF41B2 /* Preview Assets.xcassets in Resources */,
+				03465F94299DE9DE00AF41B2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03465F9B299DE9DE00AF41B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03465FA5299DE9DE00AF41B2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		03465F88299DE9DD00AF41B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03465FBD299E0C5E00AF41B2 /* Player.swift in Sources */,
+				03465F92299DE9DD00AF41B2 /* ContentView.swift in Sources */,
+				03465FBB299E0B7F00AF41B2 /* Streaming.swift in Sources */,
+				03465F90299DE9DD00AF41B2 /* LegoCamApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03465F99299DE9DE00AF41B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03465FA2299DE9DE00AF41B2 /* LegoCamTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03465FA3299DE9DE00AF41B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03465FAC299DE9DE00AF41B2 /* LegoCamUITests.swift in Sources */,
+				03465FAE299DE9DE00AF41B2 /* LegoCamUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		03465F9F299DE9DE00AF41B2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03465F8B299DE9DD00AF41B2 /* LegoCam */;
+			targetProxy = 03465F9E299DE9DE00AF41B2 /* PBXContainerItemProxy */;
+		};
+		03465FA9299DE9DE00AF41B2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03465F8B299DE9DD00AF41B2 /* LegoCam */;
+			targetProxy = 03465FA8299DE9DE00AF41B2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		03465FAF299DE9DE00AF41B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		03465FB0299DE9DE00AF41B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		03465FB2299DE9DE00AF41B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LegoCam/LegoCam.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"LegoCam/Preview Content\"";
+				DEVELOPMENT_TEAM = 4KAKLX2UX4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.doormouse.LegoCam;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		03465FB3299DE9DE00AF41B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LegoCam/LegoCam.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"LegoCam/Preview Content\"";
+				DEVELOPMENT_TEAM = 4KAKLX2UX4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.doormouse.LegoCam;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		03465FB5299DE9DE00AF41B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4KAKLX2UX4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.doormouse.LegoCamTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LegoCam.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LegoCam";
+			};
+			name = Debug;
+		};
+		03465FB6299DE9DE00AF41B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4KAKLX2UX4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.doormouse.LegoCamTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LegoCam.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LegoCam";
+			};
+			name = Release;
+		};
+		03465FB8299DE9DE00AF41B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4KAKLX2UX4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.doormouse.LegoCamUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LegoCam;
+			};
+			name = Debug;
+		};
+		03465FB9299DE9DE00AF41B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4KAKLX2UX4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.doormouse.LegoCamUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LegoCam;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		03465F87299DE9DD00AF41B2 /* Build configuration list for PBXProject "LegoCam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03465FAF299DE9DE00AF41B2 /* Debug */,
+				03465FB0299DE9DE00AF41B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03465FB1299DE9DE00AF41B2 /* Build configuration list for PBXNativeTarget "LegoCam" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03465FB2299DE9DE00AF41B2 /* Debug */,
+				03465FB3299DE9DE00AF41B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03465FB4299DE9DE00AF41B2 /* Build configuration list for PBXNativeTarget "LegoCamTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03465FB5299DE9DE00AF41B2 /* Debug */,
+				03465FB6299DE9DE00AF41B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03465FB7299DE9DE00AF41B2 /* Build configuration list for PBXNativeTarget "LegoCamUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03465FB8299DE9DE00AF41B2 /* Debug */,
+				03465FB9299DE9DE00AF41B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 03465F84299DE9DD00AF41B2 /* Project object */;
+}

@@ -1,0 +1,13 @@
+{
+  "data" : [
+    {
+      "filename" : "640x480.jpg",
+      "idiom" : "universal",
+      "universal-type-identifier" : "public.jpeg"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
