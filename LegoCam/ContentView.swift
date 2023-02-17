@@ -120,7 +120,7 @@ struct ContentView: View {
 
                 if frames.count > 1 {
                     Button {
-                        player.stop()
+                        togglePlayback()
                     } label: {
                         Image(systemName: player.currentFrame == nil ? "play.fill" : "stop.fill")
                     }
@@ -142,7 +142,7 @@ struct ContentView: View {
             player.stop()
         } else {
             selectedFrameIndex = nil
-            player.play(frames: frames)
+            player.play(frames: frames, framerate: 15)
         }
     }
 }

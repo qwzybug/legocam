@@ -24,8 +24,8 @@ class Player<T>: ObservableObject {
     }
 
     func stop() {
-        currentFrame = nil
         timer?.invalidate()
         timer = nil
+        currentFrame = nil
     }
 }
