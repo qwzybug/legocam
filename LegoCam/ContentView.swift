@@ -96,21 +96,13 @@ struct ContentView: View {
                     HStack {
                         ForEach(0 ..< frames.count, id: \.self) { idx in
                             let frame = frames[idx]
-                            Button {
+                            FrameButton(frame: frame, selectAction: {
                                 player.stop()
                                 selectedFrameIndex = (selectedFrameIndex == idx) ? nil : idx
-                            } label: {
-                                Image(frame.image, scale: 1, label: Text(frame.id.uuidString))
-                                    .resizable()
-                                    .scaledToFill()
-                                    .overlay {
-                                        RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                            .stroke(lineWidth: 6.0)
-                                            .foregroundColor(idx == selectedFrameIndex ? .accentColor : .clear)
-                                    }
-                            }
-                            .buttonStyle(.borderless)
-                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            }, deleteAction: {
+                                frames.remove(at: idx)
+                                selectedFrameIndex = frames.count < 1 ? nil : min(idx, frames.count - 1)
+                            }, isSelected: .constant(idx == selectedFrameIndex))
                         }
                     }
                     .frame(height: 64)
@@ -144,6 +136,48 @@ struct ContentView: View {
             selectedFrameIndex = nil
             player.play(frames: frames, framerate: 15)
         }
+    }
+}
+
+struct FrameButton: View {
+    let frame: Frame
+    let selectAction: () -> Void
+    let deleteAction: () -> Void
+
+    @Binding var isSelected: Bool
+
+    var body: some View {
+        ZStack {
+            Button {
+                selectAction()
+            } label: {
+                Image(frame.image, scale: 1, label: Text(frame.id.uuidString))
+                    .resizable()
+                    .scaledToFill()
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            .stroke(lineWidth: 6.0)
+                            .foregroundColor(isSelected ? .accentColor : .clear)
+                    }
+            }
+            .buttonStyle(.borderless)
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+
+            if isSelected {
+                Button(role: .destructive) {
+                    deleteAction()
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .imageScale(.large)
+                        .padding(8)
+                }
+                .foregroundColor(.primary)
+                .buttonStyle(.borderless)
+                .frame(width: 64, height: 64)
+                .position(x: 16, y: 16)
+            }
+        }
+
     }
 }
 
