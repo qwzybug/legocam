@@ -14,11 +14,21 @@ struct Frame: Identifiable {
 }
 
 struct ContentView: View {
+    static var toolbarPlacement: ToolbarItemPlacement {
+        #if os(iOS)
+        .bottomBar
+        #else
+        .automatic
+        #endif
+    }
+
     @AppStorage("streamingAddress") var address: String = ""
     @State var frames: [Frame] = []
 
     @ObservedObject var streamer: MJPEGStreamer
     @ObservedObject var player = Player<Frame>()
+
+    @State var exportURL: URL?
 
     @State var selectedFrameIndex: Int? = nil
     var selectedFrame: Frame? {
@@ -28,6 +38,8 @@ struct ContentView: View {
             return nil
         }
     }
+
+    @State private var showShareSheet = false
 
     var body: some View {
         VStack {
@@ -54,6 +66,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .padding()
 
             ZStack {
                 let image = selectedFrame?.image ?? player.currentFrame?.image ?? streamer.image
@@ -84,6 +97,7 @@ struct ContentView: View {
                 }
             } label: {
                 Image(systemName: "camera")
+                    .imageScale(.large)
             }
             .frame(width: 48, height: 48)
             .buttonStyle(.borderless)
@@ -92,6 +106,7 @@ struct ContentView: View {
             .clipShape(Circle())
             .opacity(streamer.image != nil ? 1.0 : 0.5)
             .disabled(streamer.image == nil)
+            .padding()
 
             HStack(spacing: 0) {
                 ScrollView([.horizontal]) {
@@ -107,20 +122,11 @@ struct ContentView: View {
                             }, isSelected: .constant(idx == selectedFrameIndex))
                         }
                     }
+                    .padding(.leading)
                     .frame(height: 64)
                 }
                 .frame(maxWidth: .infinity)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
-
-                if frames.count > 1 {
-                    Button {
-                        togglePlayback()
-                    } label: {
-                        Image(systemName: player.currentFrame == nil ? "play.fill" : "stop.fill")
-                    }
-                    .buttonStyle(.borderless)
-                    .frame(maxWidth: 32, maxHeight: 64)
-                }
             }
         }
         .padding()
@@ -129,6 +135,61 @@ struct ContentView: View {
                 streamer.stop()
             }
         })
+        .toolbar {
+            ToolbarItemGroup(placement: Self.toolbarPlacement) {
+                // empty button, for centering
+                Button { } label: { }
+
+                Spacer()
+
+                Button {
+                    togglePlayback()
+                } label: {
+                    Image(systemName: player.currentFrame == nil ? "play.fill" : "stop.fill")
+                        .imageScale(.large)
+                }
+                .disabled(frames.count < 1)
+
+                Spacer()
+
+                Button {
+                    #if os(iOS)
+                    Task {
+                        self.exportURL = await exportVideo()
+                    }
+                    #else
+                    if let url = showSavePanel() {
+                        Task {
+                            try await VideoWriter.writeSequence(frames.map(\.image), to: url)
+                        }
+                    }
+                    #endif
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                .disabled(frames.count < 1)
+            }
+        }
+        #if os(iOS)
+        .sheet(isPresented: .constant(exportURL != nil), onDismiss: {
+            exportURL = nil
+        }) {
+            ShareSheet(activityItems: [exportURL!])
+        }
+        #endif
+    }
+
+    func exportVideo() async -> URL? {
+        let outFname = String(format: "Lego movie - %@.mp4", Date().ISO8601Format(.init(timeSeparator: .omitted)))
+        let outPath = NSTemporaryDirectory().appending(outFname)
+        let outURL = URL(filePath: outPath)
+        do {
+            try await VideoWriter.writeSequence(frames.map(\.image), to: outURL)
+            return outURL
+        } catch {
+            print("Error! \(error.localizedDescription)")
+            return nil
+        }
     }
 
     func togglePlayback() {
@@ -139,6 +200,20 @@ struct ContentView: View {
             player.play(frames: frames, framerate: 15)
         }
     }
+
+    #if os(macOS)
+    func showSavePanel() -> URL? {
+        let savePanel = NSSavePanel()
+        savePanel.allowedContentTypes = [.mpeg4Movie]
+        savePanel.canCreateDirectories = true
+        savePanel.isExtensionHidden = false
+        savePanel.allowsOtherFileTypes = false
+        savePanel.title = "Save your movie"
+        savePanel.nameFieldLabel = "File name:"
+        let response = savePanel.runModal()
+        return response == .OK ? savePanel.url : nil
+    }
+    #endif
 }
 
 struct FrameButton: View {
@@ -210,6 +285,7 @@ struct ContentView_Previews: PreviewProvider {
         let frames = Array(repeating: frame, count: 10)
         Group {
             ContentView(frames: frames, streamer: streamer, selectedFrameIndex: 1)
+                .previewDevice(PreviewDevice(rawValue: "iPhone 13 mini"))
 //                .frame(width: 320, height: 480)
 //
 //            ContentView(frames: frames, streamer: streamer)
