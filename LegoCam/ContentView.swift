@@ -160,7 +160,7 @@ struct ContentView: View {
                     #else
                     if let url = showSavePanel() {
                         Task {
-                            try await VideoWriter.writeSequence(frames.map(\.image), to: url)
+                            try await VideoWriter.write(sequence: frames.map(\.image), to: url)
                         }
                     }
                     #endif
@@ -184,7 +184,7 @@ struct ContentView: View {
         let outPath = NSTemporaryDirectory().appending(outFname)
         let outURL = URL(filePath: outPath)
         do {
-            try await VideoWriter.writeSequence(frames.map(\.image), to: outURL)
+            try await VideoWriter.write(sequence: frames.map(\.image), to: outURL)
             return outURL
         } catch {
             print("Error! \(error.localizedDescription)")

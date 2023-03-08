@@ -18,7 +18,7 @@ struct VideoWriter {
         case appendImageFailed
     }
 
-    static func writeSequence(_ images: [CGImage], to url: URL, framerate: Int = 30) async throws {
+    static func write(sequence images: [CGImage], to url: URL, framerate: Int = 30) async throws {
         guard !FileManager.default.fileExists(atPath: url.path) else {
             throw VideoWritingError.fileExists
         }
@@ -30,12 +30,14 @@ struct VideoWriter {
         print("Starting to write to \(url)...")
         let writer = try AVAssetWriter(outputURL: url, fileType: .mp4)
 
-        let input = AVAssetWriterInput(mediaType: .video, outputSettings: [AVVideoCodecKey: AVVideoCodecType.hevc, AVVideoWidthKey: firstImage.width, AVVideoHeightKey: firstImage.height])
+        let input = AVAssetWriterInput(mediaType: .video, outputSettings: [
+            AVVideoCodecKey: AVVideoCodecType.hevc,
+            AVVideoWidthKey: firstImage.width,
+            AVVideoHeightKey: firstImage.height])
         input.expectsMediaDataInRealTime = false
+        writer.add(input)
 
         let inputAdapter = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: input, sourcePixelBufferAttributes: nil)
-
-        writer.add(input)
 
         writer.startWriting()
         writer.startSession(atSourceTime: .zero)
@@ -54,17 +56,17 @@ struct VideoWriter {
             let ciImage = CIImage(cgImage: image)
             context.render(ciImage, to: pixelBuffer)
 
-            if !inputAdapter.append(pixelBuffer, withPresentationTime: CMTime(value: CMTimeValue(idx), timescale: 30)) {
+            if !inputAdapter.append(pixelBuffer, withPresentationTime: CMTime(value: CMTimeValue(idx), timescale: CMTimeScale(framerate))) {
                 throw VideoWritingError.appendImageFailed
             }
         }
 
         input.markAsFinished()
 
-        _ = await withCheckedContinuation({ (continuation: CheckedContinuation<Bool, Never>) in
+        await withCheckedContinuation({ (continuation: CheckedContinuation<Void, Never>) in
             writer.finishWriting {
                 print("Finished writing!")
-                continuation.resume(returning: true)
+                continuation.resume()
             }
         })
     }
