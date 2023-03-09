@@ -10,12 +10,11 @@ import SwiftUI
 class Bulb: ObservableObject {
     @Published public var state = false
 
-    @MainActor
-    public func flash(illuminationTime: TimeInterval = 0.01) {
-        dispatchPrecondition(condition: .onQueue(.main))
+    public func flash(illuminationTime: Duration = .seconds(0.01)) {
         state = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + illuminationTime) {
-            self.state = false
+        Task {
+            try await Task.sleep(for: illuminationTime)
+            state = false
         }
     }
 }
