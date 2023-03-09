@@ -41,6 +41,8 @@ struct ContentView: View {
 
     @State private var showShareSheet = false
 
+    var flash = FlashOverlay()
+
     var body: some View {
         VStack {
             HStack {
@@ -74,6 +76,7 @@ struct ContentView: View {
                     Image(image, scale: 1, label: Text("Image"))
                         .resizable()
                         .scaledToFit()
+                        .overlay(flash)
                         .overlay {
                             RoundedRectangle(cornerRadius: 2, style: .continuous)
                                 .stroke(lineWidth: 2)
@@ -88,9 +91,9 @@ struct ContentView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             Button {
-                if selectedFrameIndex != nil {
-                    selectedFrameIndex = nil
-                } else if let image = streamer.image {
+                selectedFrameIndex = nil
+                if let image = streamer.image {
+                    flash.bulb.flash(illuminationTime: 0.05)
                     withAnimation {
                         frames.append(Frame(image: image))
                     }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		032A4C4F29AB3031000A4CAA /* VideoWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032A4C4E29AB3031000A4CAA /* VideoWriter.swift */; };
 		032A4C5129AB35B2000A4CAA /* Sharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032A4C5029AB35B2000A4CAA /* Sharing.swift */; };
+		032A4C8D29B97822000A4CAA /* Flash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032A4C8C29B97822000A4CAA /* Flash.swift */; };
 		03465F90299DE9DD00AF41B2 /* LegoCamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03465F8F299DE9DD00AF41B2 /* LegoCamApp.swift */; };
 		03465F92299DE9DD00AF41B2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03465F91299DE9DD00AF41B2 /* ContentView.swift */; };
 		03465F94299DE9DE00AF41B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03465F93299DE9DE00AF41B2 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		032A4C4E29AB3031000A4CAA /* VideoWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoWriter.swift; sourceTree = "<group>"; };
 		032A4C5029AB35B2000A4CAA /* Sharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sharing.swift; sourceTree = "<group>"; };
+		032A4C8C29B97822000A4CAA /* Flash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flash.swift; sourceTree = "<group>"; };
 		03465F8C299DE9DD00AF41B2 /* LegoCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LegoCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03465F8F299DE9DD00AF41B2 /* LegoCamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegoCamApp.swift; sourceTree = "<group>"; };
 		03465F91299DE9DD00AF41B2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				03465F96299DE9DE00AF41B2 /* Preview Content */,
 				032A4C4E29AB3031000A4CAA /* VideoWriter.swift */,
 				032A4C5029AB35B2000A4CAA /* Sharing.swift */,
+				032A4C8C29B97822000A4CAA /* Flash.swift */,
 			);
 			path = LegoCam;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				03465F92299DE9DD00AF41B2 /* ContentView.swift in Sources */,
 				03465FBB299E0B7F00AF41B2 /* Streaming.swift in Sources */,
 				03465F90299DE9DD00AF41B2 /* LegoCamApp.swift in Sources */,
+				032A4C8D29B97822000A4CAA /* Flash.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
