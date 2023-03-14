@@ -5,12 +5,71 @@
 //  Created by devin chalmers on 2/15/23.
 //
 
+import Combine
 import CoreGraphics
 import SwiftUI
 
 struct Frame: Identifiable {
     let id = UUID()
     let image: CGImage
+}
+
+class LegoStreamButton: ObservableObject {
+    var action: ((Bool) -> Void)?
+
+    private var streamer: MJPEGStreamer
+    private var buttonReceiver: AnyCancellable?
+
+    init(streamer: MJPEGStreamer) {
+        self.streamer = streamer
+
+    }
+
+}
+
+@MainActor
+class LegoViewModel: ObservableObject {
+    @Published var frames: [Frame] = []
+    @Published var player = Player<Frame>()
+
+    @Published var selectedFrameIndex: Int? = nil
+    var selectedFrame: Frame? {
+        if let idx = selectedFrameIndex, idx < frames.count {
+            return frames[idx]
+        } else {
+            return nil
+        }
+    }
+
+    private var streamer: MJPEGStreamer
+    private var buttonReceiver: AnyCancellable?
+    private var bulb: Bulb
+
+    init(streamer: MJPEGStreamer, bulb: Bulb) {
+        self.streamer = streamer
+        self.bulb = bulb
+        
+        self.buttonReceiver = streamer.$latestResponseHeaders
+            .receive(on: RunLoop.main)
+            .map({ $0?["X-Button-Pressed"] as? String == "1" })
+            .debounce(for: 0.01, scheduler: RunLoop.main)
+            .removeDuplicates()
+            .sink { buttonDown in
+                if buttonDown {
+                    self.takePicture()
+                }
+            }
+    }
+
+    func takePicture() {
+        selectedFrameIndex = nil
+        if let image = streamer.image {
+            bulb.flash(illuminationTime: .seconds(0.05))
+            withAnimation {
+                frames.append(Frame(image: image))
+            }
+        }
+    }
 }
 
 struct ContentView: View {
@@ -23,25 +82,22 @@ struct ContentView: View {
     }
 
     @AppStorage("streamingAddress") var address: String = ""
-    @State var frames: [Frame] = []
 
+    @ObservedObject var model: LegoViewModel
     @ObservedObject var streamer: MJPEGStreamer
-    @ObservedObject var player = Player<Frame>()
+    @ObservedObject var bulb: Bulb
 
     @State var exportURL: URL?
-
-    @State var selectedFrameIndex: Int? = nil
-    var selectedFrame: Frame? {
-        if let idx = selectedFrameIndex, idx < frames.count {
-            return frames[idx]
-        } else {
-            return nil
-        }
-    }
-
     @State private var showShareSheet = false
 
-    var flash = FlashOverlay()
+    var flash: FlashOverlay
+
+    init(model: LegoViewModel, streamer: MJPEGStreamer, bulb: Bulb) {
+        self.model = model
+        self.streamer = streamer
+        self.bulb = bulb
+        self.flash = FlashOverlay(bulb: bulb)
+    }
 
     var body: some View {
         VStack {
@@ -63,7 +119,7 @@ struct ContentView: View {
                     Button("Connecting...", action: {}).disabled(true)
 
                 case .streaming:
-                    Button("Stop") {
+                    Button("Disconnect") {
                         streamer.stop()
                     }
                 }
@@ -71,7 +127,7 @@ struct ContentView: View {
             .padding()
 
             ZStack {
-                let image = selectedFrame?.image ?? player.currentFrame?.image ?? streamer.image
+                let image = model.selectedFrame?.image ?? model.player.currentFrame?.image ?? streamer.image
                 if let image = image {
                     Image(image, scale: 1, label: Text("Image"))
                         .resizable()
@@ -91,13 +147,7 @@ struct ContentView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             Button {
-                selectedFrameIndex = nil
-                if let image = streamer.image {
-                    flash.bulb.flash(illuminationTime: 0.05)
-                    withAnimation {
-                        frames.append(Frame(image: image))
-                    }
-                }
+                model.takePicture()
             } label: {
                 Image(systemName: "camera")
                     .imageScale(.large)
@@ -114,15 +164,15 @@ struct ContentView: View {
             HStack(spacing: 0) {
                 ScrollView([.horizontal]) {
                     HStack {
-                        ForEach(0 ..< frames.count, id: \.self) { idx in
-                            let frame = frames[idx]
+                        ForEach(0 ..< model.frames.count, id: \.self) { idx in
+                            let frame = model.frames[idx]
                             FrameButton(frame: frame, selectAction: {
-                                player.stop()
-                                selectedFrameIndex = (selectedFrameIndex == idx) ? nil : idx
+                                model.player.stop()
+                                model.selectedFrameIndex = (model.selectedFrameIndex == idx) ? nil : idx
                             }, deleteAction: {
-                                frames.remove(at: idx)
-                                selectedFrameIndex = frames.count < 1 ? nil : min(idx, frames.count - 1)
-                            }, isSelected: .constant(idx == selectedFrameIndex))
+                                model.frames.remove(at: idx)
+                                model.selectedFrameIndex = model.frames.count < 1 ? nil : min(idx, model.frames.count - 1)
+                            }, isSelected: .constant(idx == model.selectedFrameIndex))
                         }
                     }
                     .padding(.leading)
@@ -148,10 +198,10 @@ struct ContentView: View {
                 Button {
                     togglePlayback()
                 } label: {
-                    Image(systemName: player.currentFrame == nil ? "play.fill" : "stop.fill")
+                    Image(systemName: model.player.currentFrame == nil ? "play.fill" : "stop.fill")
                         .imageScale(.large)
                 }
-                .disabled(frames.count < 1)
+                .disabled(model.frames.count < 1)
 
                 Spacer()
 
@@ -163,14 +213,14 @@ struct ContentView: View {
                     #else
                     if let url = showSavePanel() {
                         Task {
-                            try await VideoWriter.write(sequence: frames.map(\.image), to: url)
+                            try await VideoWriter.write(sequence: model.frames.map(\.image), to: url)
                         }
                     }
                     #endif
                 } label: {
                     Image(systemName: "square.and.arrow.up")
                 }
-                .disabled(frames.count < 1)
+                .disabled(model.frames.count < 1)
             }
         }
         #if os(iOS)
@@ -187,7 +237,7 @@ struct ContentView: View {
         let outPath = NSTemporaryDirectory().appending(outFname)
         let outURL = URL(filePath: outPath)
         do {
-            try await VideoWriter.write(sequence: frames.map(\.image), to: outURL)
+            try await VideoWriter.write(sequence: model.frames.map(\.image), to: outURL)
             return outURL
         } catch {
             print("Error! \(error.localizedDescription)")
@@ -196,11 +246,11 @@ struct ContentView: View {
     }
 
     func togglePlayback() {
-        if player.currentFrame != nil {
-            player.stop()
+        if model.player.currentFrame != nil {
+            model.player.stop()
         } else {
-            selectedFrameIndex = nil
-            player.play(frames: frames, framerate: 15)
+            model.selectedFrameIndex = nil
+            model.player.play(frames: model.frames, framerate: 15)
         }
     }
 
@@ -286,8 +336,13 @@ struct ContentView_Previews: PreviewProvider {
         let image = CGImage.withDataAsset(named: "JPEGData")!
         let frame = Frame(image: image)
         let frames = Array(repeating: frame, count: 10)
+        let button = LegoStreamButton(streamer: streamer)
+        let bulb = Bulb()
+        let model = LegoViewModel(streamer: streamer, bulb: bulb)
+//        model.frames = frames
+//        model.selectedFrameIndex = 1
         Group {
-            ContentView(frames: frames, streamer: streamer, selectedFrameIndex: 1)
+            ContentView(model: model, streamer: streamer, bulb: bulb)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 13 mini"))
 //                .frame(width: 320, height: 480)
 //

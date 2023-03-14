@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 class Bulb: ObservableObject {
     @Published public var state = false
 

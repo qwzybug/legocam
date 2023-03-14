@@ -35,6 +35,7 @@ class MJPEGStreamer: NSObject, ObservableObject, URLSessionDataDelegate {
 
     @Published var state = State.idle
     @Published var image: CGImage?
+    @Published var latestResponseHeaders: [AnyHashable: Any]?
 
     var error: StreamError? {
         if case let .error(error) = state {
@@ -99,6 +100,9 @@ class MJPEGStreamer: NSObject, ObservableObject, URLSessionDataDelegate {
 
         if let contentType = response.value(forHTTPHeaderField: "Content-Type"), contentType == "image/jpeg",
            let contentLength = Int(response.value(forHTTPHeaderField: "Content-Length") ?? "") {
+            DispatchQueue.main.async {
+                self.latestResponseHeaders = response.allHeaderFields
+            }
             munger = JPEGMunger(bytes: contentLength)
         }
 
