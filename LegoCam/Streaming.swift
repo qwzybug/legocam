@@ -59,9 +59,12 @@ class MJPEGStreamer: NSObject, ObservableObject, URLSessionDataDelegate {
     }
 
     func start(address: String) {
-        guard case .idle = state else {
-            NSLog("ERROR: Already started stream")
+        switch state {
+        case .connecting, .streaming:
+            NSLog("Couldn't start stream: already streaming!")
             return
+
+        default: break
         }
 
         guard let url = URL(string: address) else {
